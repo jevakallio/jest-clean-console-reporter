@@ -3,3 +3,4 @@ projects
 yarn-error.log
 build
 coverage
+.DS_Store

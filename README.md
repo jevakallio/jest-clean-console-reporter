@@ -10,6 +10,14 @@ Now that Jest prints all console messages, whether from our own code, third-part
 
 The `jest-clean-console-reporter` reporter collects all console messages written by the test process, and allows you to group them by known error warning types, or ignore them outright.
 
+![Demo](docs/demo.png)
+
+## Stating the obvious
+
+**The best way to remove warnings in your code is to address their root cause.**
+
+This reporter is probably best used when filtering out spammy library warnings that are otherwise tricky or impossible to get rid of, or ignoring intentional user-facing warnings of your own project.
+
 ## Usage
 
 Install with your favorite package manager:
@@ -21,32 +29,27 @@ npm install --save-dev jest-clean-console-reporter
 Configure:
 
 ```js
-// List known warnings you want to group or suppress.
+// List known warnings you want to group or suppress. See docs below.
 // (Tip: You can import this from an external file)
 const knownWarnings [
-  // Group all matching messages and print a summary at the end of the run
   {
     match: /^You are using the simple \(heuristic\) fragment matcher/,
     group: "Apollo: You are using the simple (heuristic) fragment matcher.",
   },
-  // Ignore these altogether
   {
     match: /^Heuristic fragment matching going on/,
     group: null,
-  },
-  {
-    match: /^Warning: componentWillMount has been renamed/,
-    group: "React deprecation warning: componentWillMount",
-  },
-  //... more
+  }
 ];
 
 // Add reporters to your jest config
 module.exports = {
-  // ... your normal jest config
+
+  // ...
+
   reporters: [
     // Add jest-clean-console-reporter. This takes place of the
-    // default DefaultReporter, and behaves otherwise identically
+    // default reporter, and behaves identically otherwise
     ["jest-clean-console-reporter", { rules: knownWarnings }],
 
     // Overriding config.reporters wipes out default reporters, so
@@ -63,7 +66,7 @@ Pass options to the reporter in your jest configuration as follows:
 ```js
 const jestConfig = {
   reporters: [
-    ["jest-clean-console-reporter", { rules: [/*...*/], levels: [/*...*/]]
+    ["jest-clean-console-reporter", options] // <--
     "@jest/reporters/build/SummaryReporter",
   ],
 };
@@ -72,7 +75,9 @@ const jestConfig = {
 ### `options.rules`
 
 Rules tell the reporter which console messages should be filtered, and how
-they should be grouped in the summary. Each rule has two parts, `match` and `format`.
+they should be grouped in the summary.
+
+Each rule has two parts, `match` and `format`.
 
 #### `rule.match : RegExp | string | (message, level) => boolean`
 
@@ -89,7 +94,7 @@ Rules are matched in order, from top down. A message that is not matched by any 
 
 Matched messages are grouped according to the `group` property:
 
-#### `rule.group : string | null | (message, level, matcher) => string | null
+#### `rule.group : string | null | (message, level, matcher) => string | null`
 
 `group` is either a string, a formatter function, or null:
 
@@ -119,7 +124,7 @@ const knownWarnings = [
 
 ## Never Asked Questions
 
-Here are some questions nobody has ever asked me, but might be helpful anyway.
+Here are some questions nobody has ever asked, but might be helpful anyway.
 
 ### Can I ignore all messages of certain log level?
 
@@ -134,7 +139,7 @@ Yes. Use the second parameter passed to a function macher:
 Yes, but it's probably a bad idea:
 
 ```js
-{ matcher: () => false, group: null }
+{ matcher: () => true, group: null }
 ```
 
 ### Can I group multiple error messages into the same bucket?
