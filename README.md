@@ -76,7 +76,7 @@ const jestConfig = {
 Rules tell the reporter which console messages should be filtered, and how
 they should be grouped in the summary.
 
-Each rule has two parts, `match` and `format`.
+Each rule has two parts, `match` and `group`.
 
 #### `rule.match : RegExp | string | (message, level) => boolean`
 
