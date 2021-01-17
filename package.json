@@ -1,0 +1,13 @@
+{
+  "name": "jest-clean-console-reporter",
+  "version": "0.1.0",
+  "description": "Jest reporter for grouping and filtering intrusive console warnings",
+  "main": "lib/index.js",
+  "repository": "https://github.com/jevakallio/jest-clean-console-reporter",
+  "author": "Jani Eväkallio",
+  "license": "MIT",
+  "dependencies": {
+    "@jest/reporters": "^26.6.2",
+    "chalk": "^4.1.0"
+  }
+}
