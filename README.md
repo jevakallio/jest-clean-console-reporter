@@ -31,7 +31,7 @@ Configure:
 ```js
 // List known warnings you want to group or suppress. See docs below.
 // (Tip: You can import this from an external file)
-const knownWarnings [
+const knownWarnings = [
   {
     match: /^You are using the simple \(heuristic\) fragment matcher/,
     group: "Apollo: You are using the simple (heuristic) fragment matcher.",
@@ -39,12 +39,11 @@ const knownWarnings [
   {
     match: /^Heuristic fragment matching going on/,
     group: null,
-  }
+  },
 ];
 
 // Add reporters to your jest config
 module.exports = {
-
   // ...
 
   reporters: [
@@ -66,7 +65,7 @@ Pass options to the reporter in your jest configuration as follows:
 ```js
 const jestConfig = {
   reporters: [
-    ["jest-clean-console-reporter", options] // <--
+    ["jest-clean-console-reporter", options], // <--
     "@jest/reporters/build/SummaryReporter",
   ],
 };
