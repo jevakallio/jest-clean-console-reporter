@@ -7,7 +7,9 @@
   "author": "Jani Eväkallio",
   "license": "MIT",
   "dependencies": {
-    "@jest/reporters": "^26.6.2",
     "chalk": "^4.1.0"
+  },
+  "peerDependencies": {
+    "@jest/reporters": "^26.6.2"
   }
 }
