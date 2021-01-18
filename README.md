@@ -26,6 +26,8 @@ Install with your favorite package manager:
 npm install --save-dev jest-clean-console-reporter
 ```
 
+You'll also need Jest 25 or later.
+
 Configure:
 
 ```js
@@ -70,6 +72,8 @@ const jestConfig = {
   ],
 };
 ```
+
+NB. If you're using **Jest 26.6.1 or earlier**, you'll need to change this to `"@jest/reporters/build/summary_reporter"` as the file was renamed in v26.6.2.
 
 ### `options.rules`
 
