@@ -195,7 +195,9 @@ This software is very much at alpha stage. If you want to help, here are a few t
 - [ ] Write tests
 - [ ] Convert project to TypeScript
 - [ ] NPM scripts for workflows
-- [ ] Provide better summary that shows
+- [ ] Feature ideas
+  - [ ] Provide better summary that shows errors by file/test (behind an option flag)
+  - [ ] Show deltas (+/- change) since last run (would require caching)
 - [ ] Known issues
   - [ ] When running Jest with a single file parameter (e.g. `jest src/file.js`), the reporter is not activated
 
