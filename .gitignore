@@ -4,3 +4,4 @@ yarn-error.log
 build
 coverage
 .DS_Store
+package-lock.json
