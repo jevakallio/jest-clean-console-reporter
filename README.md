@@ -123,7 +123,7 @@ Matched messages are grouped according to the `group` property:
   - `matcher` is the original matcher used to match this message. This can be useful if you want to e.g. execute the regular expression for capture groups.
   - The value returned by this function is used as capture key. If the function returns `null`, the message is ignored.
 
-### `rule.keep: boolean`
+#### `rule.keep: boolean`
 
 Setting `keep: true` option allows you to keep the original console output for this group intact, while also displaying it in the test run summary.
 
