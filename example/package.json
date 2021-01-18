@@ -1,0 +1,14 @@
+{
+  "name": "jest-clean-console-reporter-test-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jani Eväkallio",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --config jest.config.js"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "jest-clean-console-reporter": "latest"
+  }
+}
