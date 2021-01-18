@@ -32,15 +32,20 @@ You'll also need Jest 25.1 or later installed in your project.
 
 ```js
 // List known warnings you want to group or suppress. See docs below.
-// (Tip: You can import this from an external file)
-const knownWarnings = [
+// Tip: This is just an array, you can import it from an external file
+const rules = [
   {
     match: /^You are using the simple \(heuristic\) fragment matcher/,
     group: "Apollo: You are using the simple (heuristic) fragment matcher.",
   },
   {
     match: /^Heuristic fragment matching going on/,
-    group: null,
+    group: null, // ignore outright
+  },
+  {
+    match: /^Warning: An update to (\w*) inside a test was not wrapped in act/,
+    group: "React: Act warnings",
+    keep: true, // include in summary, but also keep raw console output
   },
 ];
 
@@ -51,12 +56,12 @@ module.exports = {
   reporters: [
     // Add jest-clean-console-reporter. This takes place of the
     // default reporter, and behaves identically otherwise
-    ["jest-clean-console-reporter", { rules: knownWarnings }],
+    ["jest-clean-console-reporter", { rules: rules }],
 
     // Overriding config.reporters wipes out default reporters, so
     // we need to restore the summary reporter.
     //
-    // @NOTE: For jest 26.6.1 or older, this file is located at
+    // NOTE: For jest 26.6.1 or older, this file is located at
     // @jest/reporters/build/summary_reporter
     "@jest/reporters/build/SummaryReporter",
   ],
