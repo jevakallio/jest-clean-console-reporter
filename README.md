@@ -26,6 +26,8 @@ Install with your favorite package manager:
 npm install --save-dev jest-clean-console-reporter
 ```
 
+You'll also need Jest 25 or later.
+
 Configure:
 
 ```js
