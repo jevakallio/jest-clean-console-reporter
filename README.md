@@ -94,7 +94,7 @@ const jestConfig = {
 Rules tell the reporter which console messages should be filtered, and how
 they should be grouped in the summary.
 
-Each rule has two parts, `match` and `group`.
+Each rule has three options, `match`, `group` and (optionally) `keep`.
 
 #### `rule.match : RegExp | string | (message, level) => boolean`
 
@@ -123,6 +123,10 @@ Matched messages are grouped according to the `group` property:
   - `matcher` is the original matcher used to match this message. This can be useful if you want to e.g. execute the regular expression for capture groups.
   - The value returned by this function is used as capture key. If the function returns `null`, the message is ignored.
 
+### `rule.keep: boolean`
+
+Setting `keep: true` option allows you to keep the original console output for this group intact, while also displaying it in the test run summary.
+
 ### options.levels
 
 Define which log levels to display in the summary at the end of the test run:
@@ -130,14 +134,6 @@ Define which log levels to display in the summary at the end of the test run:
 Default: `["error", "warn", "info", "debug", "log"]`
 
 These levels only affect the summary display, and have no effect on whether messages are matched. For that, see [Can I ignore all messages of certain log level?](#can-i-ignore-all-messages-of-certain-log-level).
-
-```js
-const knownWarnings = [
-  // ...other rules...
-  // this rule should be defined last
-  { match: (message, level) => level === "log", group: null },
-];
-```
 
 ## Never Asked Questions
 
@@ -174,6 +170,18 @@ Yes, just give them the same group key:
     group: "React componentWill* deprecation warnings",
   },
 ];
+```
+
+### Can I temporarily let a certain message through?
+
+Yes, just set the rule's `keep` property to `true`:
+
+```js
+{
+  match: /^Warning: An update to (\w*) inside a test was not wrapped in act/,
+  group: "An update to (Component) inside a test was not wrapped in act",
+  keep: true
+}
 ```
 
 ### Can I use this with .json config?
