@@ -1,6 +1,6 @@
 {
   "name": "jest-clean-console-reporter",
-  "version": "0.1.1",
+  "version": "0.2.0-1",
   "description": "Jest reporter for grouping and filtering intrusive console warnings",
   "main": "lib/index.js",
   "repository": "https://github.com/jevakallio/jest-clean-console-reporter",
@@ -9,10 +9,11 @@
   "scripts": {
     "prepare": "npm-install-peers"
   },
-  "peerDependencies": {
-    "@jest/console": ">=25.1.0",
-    "@jest/reporters": ">=25.1.0",
+  "dependencies": {
     "chalk": ">=3.0.0"
+  },
+  "peerDependencies": {
+    "jest": ">=25.1.0"
   },
   "devDependencies": {
     "npm-install-peers": "^1.2.1"
