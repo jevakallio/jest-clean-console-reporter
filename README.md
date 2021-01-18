@@ -26,9 +26,9 @@ Install with your favorite package manager:
 npm install --save-dev jest-clean-console-reporter
 ```
 
-You'll also need Jest 25 or later.
+You'll also need Jest 25.1 or later installed in your project.
 
-Configure:
+### Configuration
 
 ```js
 // List known warnings you want to group or suppress. See docs below.
@@ -54,7 +54,10 @@ module.exports = {
     ["jest-clean-console-reporter", { rules: knownWarnings }],
 
     // Overriding config.reporters wipes out default reporters, so
-    // we need to restore the summary reporter
+    // we need to restore the summary reporter.
+    //
+    // @NOTE: For jest 26.6.1 or older, this file is located at
+    // @jest/reporters/build/summary_reporter
     "@jest/reporters/build/SummaryReporter",
   ],
 };
@@ -63,6 +66,8 @@ module.exports = {
 ## Options
 
 Pass options to the reporter in your jest configuration as follows:
+
+### Using Jest 26.6.2 or newer
 
 ```js
 const jestConfig = {
@@ -73,7 +78,16 @@ const jestConfig = {
 };
 ```
 
-NB. If you're using **Jest 26.6.1 or earlier**, you'll need to change this to `"@jest/reporters/build/summary_reporter"` as the file was renamed in v26.6.2.
+### Using Jest 25.1.0-26.6.1
+
+```js
+const jestConfig = {
+  reporters: [
+    ["jest-clean-console-reporter", options], // <--
+    "@jest/reporters/build/summary_reporter",
+  ],
+};
+```
 
 ### `options.rules`
 

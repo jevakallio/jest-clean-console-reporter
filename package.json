@@ -6,10 +6,15 @@
   "repository": "https://github.com/jevakallio/jest-clean-console-reporter",
   "author": "Jani Eväkallio",
   "license": "MIT",
-  "dependencies": {
-    "chalk": "^4.1.0"
+  "scripts": {
+    "prepare": "npm-install-peers"
   },
   "peerDependencies": {
-    "@jest/reporters": "^25.0.0"
+    "@jest/console": ">=25.1.0",
+    "@jest/reporters": ">=25.1.0",
+    "chalk": ">=3.0.0"
+  },
+  "devDependencies": {
+    "npm-install-peers": "^1.2.1"
   }
 }
