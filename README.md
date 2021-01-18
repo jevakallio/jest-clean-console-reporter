@@ -195,7 +195,10 @@ This software is very much at alpha stage. If you want to help, here are a few t
 - [ ] Write tests
 - [ ] Convert project to TypeScript
 - [ ] NPM scripts for workflows
+- [ ] Don't override DefaultReporter
+  - [ ] When I started hacking on this, I couldn't immediately see a way to suppress `result.console` from being printed by the DefaultReporter, so I overrode it. This is annoying, because it can't be used with other custom reporters now. But it occurs to me, that maybe if a custom reporter is installed in the pipeline **before** the default reporter, perhaps we could filter out console messages there. Tradeoff here would be that we would nuke the console for ALL other reporters, whereas now we only do it for DefaultReporter.
 - [ ] Feature ideas
+  - [ ] Allow to fail the test suite after a certain threshold is passed, e.g. `rule.failAfter`.
   - [ ] Provide better summary that shows errors by file/test (behind an option flag)
   - [ ] Show deltas (+/- change) since last run (would require caching)
 - [ ] Known issues
