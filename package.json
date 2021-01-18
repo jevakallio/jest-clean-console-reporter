@@ -10,6 +10,6 @@
     "chalk": "^4.1.0"
   },
   "peerDependencies": {
-    "@jest/reporters": "^26.6.2"
+    "@jest/reporters": "^25.0.0"
   }
 }
