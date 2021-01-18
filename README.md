@@ -71,6 +71,8 @@ const jestConfig = {
 };
 ```
 
+NB. If you're using **Jest 26.6.1 or earlier**, you'll need to change this to `"@jest/reporters/build/summary_reporter"` as the file was renamed in v26.6.2.
+
 ### `options.rules`
 
 Rules tell the reporter which console messages should be filtered, and how
