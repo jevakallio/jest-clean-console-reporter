@@ -1,5 +1,7 @@
 /* global require, module */
 
+import {LogType} from "@jest/console";
+
 const chalk = require("chalk");
 
 // Explicitly reset for these messages since they can get written out in the
@@ -10,7 +12,7 @@ const LOG_TEXT = "LOG";
 const INFO_TEXT = "INFO";
 const DEBUG_TEXT = "DEBUG";
 
-const statusByType = {
+const statusByType: Partial<Record<LogType, string>> = {
   error: chalk.supportsColor
     ? chalk.reset.bold.red(` ${ERROR_TEXT}`.padEnd(7))
     : ERROR_TEXT,
@@ -28,30 +30,26 @@ const statusByType = {
     : DEBUG_TEXT,
 };
 
-const formatCount = (count) => {
+export const formatCount = (count: number): string => {
   const chars = count.toString();
   const chalked = chalk.bold(chars);
   const formatChars = chalked.length - chars.length;
   return `${chalked}`.padEnd(5 + formatChars, " ");
 };
 
-const formatMessage = (key) => {
+export const formatMessage = (key: string): string => {
   const truncated = key.length > 100 ? `${key.substring(0, 100)}...` : key;
   const singleline = truncated.replace(/[\r\n]+/g, " ");
-  const highlighted = singleline.replace("@TODO", chalk.bold("@TODO"));
-
-  return highlighted;
+  return singleline.replace("@TODO", chalk.bold("@TODO"));
 };
 
-const getLogGroupHeader = (type, key, count) => {
-  const status = statusByType[type] || type.toUpperCase();
+export const getLogGroupHeader = (type: LogType, key: string, count: number): string => {
+  const status: string = statusByType[type] || type.toUpperCase();
   return `${status} ${formatCount(count)} ${formatMessage(key)}`;
 };
 
-const getSkippedHeader = (count) => {
+export const getSkippedHeader = (count: number): string => {
   const label = " SKIP".padEnd(7);
   const message = `${label} ${formatCount(count)} messages were filtered`;
   return chalk.supportsColor ? chalk.reset.gray(message) : message;
 };
-
-module.exports = { getLogGroupHeader, getSkippedHeader };

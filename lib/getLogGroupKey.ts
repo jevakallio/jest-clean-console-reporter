@@ -1,5 +1,9 @@
 /* global module */
-const matchWith = (matcher, message, type, origin) => {
+import {Group, Matcher, Rule} from "./types";
+import {LogType} from "@jest/console";
+import {LogEntry} from "@jest/console/build/types";
+
+export const matchWith = (matcher: Matcher, message: string, type: LogType, origin: string) => {
   if (matcher instanceof RegExp) {
     return matcher.test(message);
   }
@@ -17,7 +21,7 @@ const matchWith = (matcher, message, type, origin) => {
   throw new Error("Filter must be a string, function or a regular expression");
 };
 
-const formatMessage = (formatter, message, type, matcher) => {
+const formatMessage = (formatter: Group, message: string, type: LogType, matcher: Matcher): string | null => {
   if (typeof formatter === "undefined") {
     return null;
   }
@@ -37,7 +41,7 @@ const formatMessage = (formatter, message, type, matcher) => {
   return message;
 };
 
-const getLogGroupKey = (rules, { message, type, origin }) => {
+export const getLogGroupKey = (rules: Rule[], { message, type, origin }: LogEntry): [string | null, boolean] | [] => {
   for (let { match: matcher, group: formatter, keep = false } of rules) {
     if (matchWith(matcher, message, type, origin)) {
       return [formatMessage(formatter, message, type, matcher), keep];
@@ -46,5 +50,3 @@ const getLogGroupKey = (rules, { message, type, origin }) => {
 
   return [];
 };
-
-module.exports = getLogGroupKey;

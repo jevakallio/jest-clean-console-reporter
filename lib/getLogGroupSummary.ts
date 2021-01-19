@@ -1,9 +1,11 @@
 /* global require module */
 
-const chalk = require("chalk");
-const { getLogGroupHeader, getSkippedHeader } = require("./getLogGroupHeader");
+import {getLogGroupHeader, getSkippedHeader} from "./getLogGroupHeader";
+import {LogType} from "@jest/console";
 
-const orderBy = ([aKey, aCount], [bKey, bCount]) => {
+const chalk = require("chalk");
+
+const orderBy = ([aKey, aCount]: [string, number], [bKey, bCount]: [string, number]): number => {
   // count descending
   if (aCount > bCount) return -1;
   if (bCount > aCount) return 1;
@@ -16,18 +18,18 @@ const orderBy = ([aKey, aCount], [bKey, bCount]) => {
   return 0;
 };
 
-const getLogGroupSummary = (logs, levels, ignored) => {
+export const getLogGroupSummary = (logs: Map<LogType, Map<string, number>>, levels: LogType[], ignored: number) => {
   if (logs.size === 0 && !ignored) {
     return null;
   }
 
   const lines = [`\n ${chalk.bold("\u25cf ")} Suppressed console messages:\n`];
-  levels.forEach((type) => {
-    const level = logs.get(type);
-    if (level) {
-      const entries = [...level.entries()].sort(orderBy);
+  levels.forEach((level) => {
+    const levelMap = logs.get(level);
+    if (levelMap) {
+      const entries = [...levelMap.entries()].sort(orderBy);
       for (let [key, count] of entries) {
-        lines.push(getLogGroupHeader(type, key, count));
+        lines.push(getLogGroupHeader(level, key, count));
       }
     }
   });
@@ -38,5 +40,3 @@ const getLogGroupSummary = (logs, levels, ignored) => {
 
   return lines;
 };
-
-module.exports = getLogGroupSummary;
