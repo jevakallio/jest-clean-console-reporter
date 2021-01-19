@@ -38,8 +38,7 @@ export class CleanConsoleReporter extends DefaultReporter {
             console: this.filterOutKnownMessages(result.console),
         };
 
-        DefaultReporter.prototype.printTestFileHeader.call(this, testPath, config,
-            filteredResult);
+        super.printTestFileHeader(testPath, config, filteredResult);
     }
 
     filterOutKnownMessages(consoleBuffer: LogEntry[] = []) {
@@ -47,12 +46,10 @@ export class CleanConsoleReporter extends DefaultReporter {
         const retain: LogEntry[] = [];
 
         for (const frame of consoleBuffer) {
-            const {type, message} = frame;
-
             // Check if this a known type message
-            const [key, keep] = getLogGroupKey(rules, message, type);
+            const [key, keep] = getLogGroupKey(rules, frame);
             if (key) {
-                this.groupMessageByKey(type, key);
+                this.groupMessageByKey(frame.type, key);
                 if (keep) {
                     retain.push(frame);
                 }

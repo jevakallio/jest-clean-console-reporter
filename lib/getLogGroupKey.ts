@@ -1,8 +1,9 @@
 /* global module */
 import {Group, Matcher, Rule} from "./types";
 import {LogType} from "@jest/console";
+import {LogEntry} from "@jest/console/build/types";
 
-export const matchWith = (matcher: Matcher, message: string, type: LogType, origin) => {
+export const matchWith = (matcher: Matcher, message: string, type: LogType, origin: string) => {
   if (matcher instanceof RegExp) {
     return matcher.test(message);
   }
@@ -40,7 +41,7 @@ const formatMessage = (formatter: Group, message: string, type: LogType, matcher
   return message;
 };
 
-const getLogGroupKey = (rules: Rule[], { message, type, origin }) => {
+export const getLogGroupKey = (rules: Rule[], { message, type, origin }: LogEntry): [string | null, boolean] | [] => {
   for (let { match: matcher, group: formatter, keep = false } of rules) {
     if (matchWith(matcher, message, type, origin)) {
       return [formatMessage(formatter, message, type, matcher), keep];

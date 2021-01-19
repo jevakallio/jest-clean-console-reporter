@@ -1,6 +1,6 @@
 import {LogType} from "@jest/console";
 
-export type Matcher = RegExp | string | ((message: string, type: LogType) => boolean)
+export type Matcher = RegExp | string | ((message: string, type: LogType, origin: string) => boolean)
 
 export type Group = string | null | ((message: string, type: LogType, matcher: Matcher) => string | null)
 
