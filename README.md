@@ -101,7 +101,7 @@ they should be grouped in the summary.
 
 Each rule has three options, `match`, `group` and (optionally) `keep`.
 
-#### `rule.match : RegExp | string | (message, level) => boolean`
+#### `rule.match : RegExp | string | (message, level, origin) => boolean`
 
 `match` is either a regular expression, a string, or a predicate function:
 
@@ -110,6 +110,7 @@ Each rule has three options, `match`, `group` and (optionally) `keep`.
 - A predicate function that's called with `match(message, level)` where
   - `message` is the full console message
   - `level` is the log level (error, warning, log etc..).
+  - `origin` is the stack trace string for this error. Useful if you want to ignore all errors from a certain library, for example. Note that this string can contain newlines, so any regexes used to match it should use the `/g` flag.
   - To match this message, the predicate may return any truthy value.
 
 Rules are matched in order, from top down. A message that is not matched by any rule will be displayed in the Jest test output as normal.
@@ -213,6 +214,21 @@ You can use the grouping function, where the original matcher is provided as a t
       return `React: An update to ${match[1]} was not wrapped in act.`;
     }
 }
+```
+
+### Can I ignore random `console.error`s from a specific library?
+
+Yes, `console.error` comes with an `origin` property that contains the full stack trace
+at the time of logging, which you should be able to use to filter per library, or even per file and line!
+
+The origin may not be available for other log types, so check it before you use it.
+
+```js
+  {
+    match: (_message, _type, origin) =>
+      origin && /node_modules\/rc-form\/lib\/createBaseForm/g.test(origin),
+    group: 'rc-form validation warnings'
+  },
 ```
 
 ### Can I help make this library better?
