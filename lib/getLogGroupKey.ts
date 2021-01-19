@@ -1,6 +1,6 @@
 /* global module */
 import {Group, Matcher, Rule} from "./types";
-import {LogType} from "@jest/console/build/types";
+import {LogType} from "@jest/console";
 
 export const matchWith = (matcher: Matcher, message: string, type: LogType, origin) => {
   if (matcher instanceof RegExp) {

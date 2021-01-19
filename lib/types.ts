@@ -1,4 +1,4 @@
-import {LogType} from "@jest/console/build/types";
+import {LogType} from "@jest/console";
 
 export type Matcher = RegExp | string | ((message: string, type: LogType) => boolean)
 

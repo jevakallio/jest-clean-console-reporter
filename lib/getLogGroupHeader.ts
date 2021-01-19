@@ -1,6 +1,6 @@
 /* global require, module */
 
-import {LogType} from "@jest/console/build/types";
+import {LogType} from "@jest/console";
 
 const chalk = require("chalk");
 
