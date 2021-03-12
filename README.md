@@ -249,7 +249,7 @@ This software is very much at alpha stage. If you want to help, here are a few t
   - [ ] Provide better summary that shows errors by file/test (behind an option flag)
   - [ ] Show deltas (+/- change) since last run (would require caching)
 - [ ] Known issues
-  - [ ] When running Jest with a single file parameter (e.g. `jest src/file.js`), the reporter is not activated
+  - [ ] When running Jest with a single file parameter (e.g. `jest src/file.js`, or a single file running in watch mode), the reporter is not activated
 
 ## License
 
