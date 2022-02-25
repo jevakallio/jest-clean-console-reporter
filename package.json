@@ -10,7 +10,7 @@
     "prepare": "npm-install-peers"
   },
   "dependencies": {
-    "chalk": ">=3.0.0"
+    "chalk": "^3.0.0 || ^4.0.0"
   },
   "peerDependencies": {
     "jest": ">=25.1.0"
