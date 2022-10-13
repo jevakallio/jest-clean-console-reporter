@@ -61,7 +61,7 @@ module.exports = {
     // Overriding config.reporters wipes out default reporters, so
     // we need to restore the summary reporter.
     //
-    // NOTE: For jest 26.6.1 or older, this file is located at
+    // NOTE: For @jest/reporters 26.6.1 or older, this file is located at
     // @jest/reporters/build/summary_reporter
     "@jest/reporters/build/SummaryReporter",
   ],
@@ -70,9 +70,9 @@ module.exports = {
 
 ## Options
 
-Pass options to the reporter in your jest configuration as follows:
+Pass options to the reporter in your jest configuration as follows. Your version of `@jest/reporters` is likely the same as your base Jest version, but it's possible that the minor version is more recent. You can determine your specific version by running `npm ls @jest/reporters`.
 
-### Using Jest 26.6.2 or newer
+### Using @jest/reporters 26.6.2 or newer
 
 ```js
 const jestConfig = {
@@ -83,7 +83,7 @@ const jestConfig = {
 };
 ```
 
-### Using Jest 25.1.0-26.6.1
+### Using @jest/reporters 25.1.0-26.6.1
 
 ```js
 const jestConfig = {
